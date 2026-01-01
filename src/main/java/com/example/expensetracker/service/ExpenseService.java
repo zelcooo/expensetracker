@@ -30,6 +30,18 @@ public class ExpenseService {
         return repository.findById(id);
     }
 
+    public Expense editExpense(long id, Expense expense) {
+
+        if (repository.existsById(id)) {
+            Expense editedExpense = repository.getReferenceById(id);
+            editedExpense.editExpense(expense);
+            return repository.save(editedExpense);
+        } else {
+            throw new NotFoundException("This expense was not found");
+        }
+
+    }
+
     // This function is to delete an Expense out of our repository. It takes in a id, and finds
     // the reference to the id and attempts to delete it. If it does not delete succesfully, 
     // that means that the id is not in the database and a exception is thrown. 

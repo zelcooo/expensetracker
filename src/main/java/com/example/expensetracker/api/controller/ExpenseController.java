@@ -25,6 +25,11 @@ public class ExpenseController {
         return service.findExpenseID(id).orElseThrow(() -> new RuntimeException("ID not found"));
     }
 
+    @PutMapping("/{id}")
+    public void edit(@RequestBody Expense expense, @PathVariable long id) {
+        service.editExpense(id, expense);
+    }
+
     @PostMapping
     public Expense create(@RequestBody Expense expense) {
         return service.createExpense(expense);
