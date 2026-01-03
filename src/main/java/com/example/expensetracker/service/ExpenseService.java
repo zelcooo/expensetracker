@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import com.example.expensetracker.Exceptions.NotFoundException;
+import com.example.expensetracker.api.dtos.CreateExpenseDto;
 import com.example.expensetracker.api.model.Expense;
 import org.springframework.stereotype.Service;
 
@@ -30,6 +31,10 @@ public class ExpenseService {
         return repository.findById(id);
     }
 
+    // This method is used to edit Expenses, it takes in a id and checks if the expense id exists.
+    // If the id exists, we create a Expense object which points to the expense in the repository
+    // then we return the object which was updated by the editExpense method. If they are not found
+    // we throw a NotFoundException. 
     public Expense editExpense(long id, Expense expense) {
 
         if (repository.existsById(id)) {
@@ -55,7 +60,13 @@ public class ExpenseService {
 
     }
 
-    public Expense createExpense(Expense expense) {
+    // This is a simple createExpense 
+    public Expense createExpense(CreateExpenseDto dto) {
+        Expense expense = new Expense(dto.getTitle(),
+                dto.getAmountSpent(),
+                dto.getCategory(),
+                dto.getDate());
+
         return repository.save(expense);
     }
 

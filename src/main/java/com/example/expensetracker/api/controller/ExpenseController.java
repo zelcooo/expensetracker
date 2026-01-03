@@ -2,8 +2,12 @@ package com.example.expensetracker.api.controller;
 
 import java.util.List;
 import org.springframework.web.bind.annotation.*;
+
+import com.example.expensetracker.api.dtos.CreateExpenseDto;
 import com.example.expensetracker.api.model.Expense;
 import com.example.expensetracker.service.ExpenseService;
+
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/expenses")
@@ -31,7 +35,7 @@ public class ExpenseController {
     }
 
     @PostMapping
-    public Expense create(@RequestBody Expense expense) {
+    public Expense create(@Valid @RequestBody CreateExpenseDto expense) {
         return service.createExpense(expense);
     }
 
