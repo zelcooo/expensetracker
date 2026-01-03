@@ -30,13 +30,6 @@ public class Expense {
         this.date = date;
     }
 
-    public void editExpense(Expense e) {
-        title = e.title;
-        amountSpent = e.amountSpent;
-        category = e.category;
-        date = e.date;
-    }
-
     protected Expense() {
     }
 

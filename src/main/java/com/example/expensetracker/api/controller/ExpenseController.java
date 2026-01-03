@@ -4,6 +4,7 @@ import java.util.List;
 import org.springframework.web.bind.annotation.*;
 
 import com.example.expensetracker.api.dtos.CreateExpenseDto;
+import com.example.expensetracker.api.dtos.EditExpenseDto;
 import com.example.expensetracker.api.model.Expense;
 import com.example.expensetracker.service.ExpenseService;
 
@@ -30,7 +31,7 @@ public class ExpenseController {
     }
 
     @PutMapping("/{id}")
-    public void edit(@RequestBody Expense expense, @PathVariable long id) {
+    public void edit(@Valid @RequestBody EditExpenseDto expense, @PathVariable long id) {
         service.editExpense(id, expense);
     }
 
