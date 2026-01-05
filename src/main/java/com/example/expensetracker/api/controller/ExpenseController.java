@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.*;
 
 import com.example.expensetracker.api.dtos.CreateExpenseDto;
 import com.example.expensetracker.api.dtos.EditExpenseDto;
+import com.example.expensetracker.api.dtos.ExpenseResponseDto;
 import com.example.expensetracker.api.model.Expense;
 import com.example.expensetracker.service.ExpenseService;
 
@@ -21,13 +22,13 @@ public class ExpenseController {
     }
 
     @GetMapping
-    public List<Expense> getAll() {
+    public List<ExpenseResponseDto> getAll() {
         return service.getAllExpense();
     }
 
     @GetMapping("/{id}")
-    public Expense getById(@PathVariable long id) {
-        return service.findExpenseID(id).orElseThrow(() -> new RuntimeException("ID not found"));
+    public ExpenseResponseDto getById(@PathVariable long id) {
+        return service.findExpenseID(id);
     }
 
     @PutMapping("/{id}")
@@ -36,7 +37,7 @@ public class ExpenseController {
     }
 
     @PostMapping
-    public Expense create(@Valid @RequestBody CreateExpenseDto expense) {
+    public ExpenseResponseDto create(@Valid @RequestBody CreateExpenseDto expense) {
         return service.createExpense(expense);
     }
 

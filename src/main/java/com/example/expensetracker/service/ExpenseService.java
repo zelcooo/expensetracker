@@ -6,6 +6,7 @@ import java.util.Optional;
 import com.example.expensetracker.Exceptions.NotFoundException;
 import com.example.expensetracker.api.dtos.CreateExpenseDto;
 import com.example.expensetracker.api.dtos.EditExpenseDto;
+import com.example.expensetracker.api.dtos.ExpenseResponseDto;
 import com.example.expensetracker.api.model.Expense;
 import org.springframework.stereotype.Service;
 
@@ -24,17 +25,18 @@ public class ExpenseService {
     }
 
     // This function is used to fetch all of the expenses from the database. 
-    public List<Expense> getAllExpense() {
+    public List<ExpenseResponseDto> getAllExpense() {
 
-        return repository.findAll();
+        return repository.findAll().stream().map(this::mapToResponseDto).toList();
 
     }
 
     // This is our function that finds an expense by its ID. It is a Optional<Expense>, so if our
     // Expense is not found, it simply returns a empty optional. 
-    public Optional<Expense> findExpenseID(long id) {
+    public ExpenseResponseDto findExpenseID(long id) {
 
-        return repository.findById(id);
+        return repository.findById(id).map(this::mapToResponseDto)
+                .orElseThrow(() -> new NotFoundException("Expense was not found"));
 
     }
 
@@ -42,7 +44,7 @@ public class ExpenseService {
     // If the id exists, we create a Expense object which points to the expense in the repository
     // then we return the object which was updated by the editExpense method. If they are not found
     // we throw a NotFoundException. 
-    public Expense editExpense(long id, EditExpenseDto expense) {
+    public ExpenseResponseDto editExpense(long id, EditExpenseDto expense) {
 
         if (repository.existsById(id)) {
 
@@ -56,8 +58,9 @@ public class ExpenseService {
             editedExpense.setDate(expense.getDate());
 
             // we then save it to our repository. 
-            return repository.save(editedExpense);
-
+            repository.save(editedExpense);
+            // then return the responseDto
+            return mapToResponseDto(editedExpense);
         } else {
 
             // If our expense was not found we throw a NotFoundException. 
@@ -86,16 +89,22 @@ public class ExpenseService {
 
     // This is a simple createExpense function, it uses a CreateExpenseDto Object to enforce valid
     // fields and then we create a Expense object out of the dto object. 
-    public Expense createExpense(CreateExpenseDto dto) {
+    public ExpenseResponseDto createExpense(CreateExpenseDto dto) {
 
         Expense expense = new Expense(dto.getTitle(),
                 dto.getAmountSpent(),
                 dto.getCategory(),
                 dto.getDate());
 
-        // we then return the expense that was saved to the repository.
-        return repository.save(expense);
+        // we then save the expense to the repository.
+        repository.save(expense);
+        // after we have saved it to the expenseRepository we return the expenseResponseDto
+        return mapToResponseDto(expense);
+    }
 
+    public ExpenseResponseDto mapToResponseDto(Expense expense) {
+        return new ExpenseResponseDto(expense.getId(), expense.getTitle(), expense.getAmountSpent(),
+                expense.getCategory(), expense.getDate());
     }
 
 }
