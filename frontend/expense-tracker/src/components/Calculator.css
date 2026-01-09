@@ -1,0 +1,33 @@
+.expense-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.expense-form label {
+  display: flex;
+  flex-direction: column;
+  font-size: 14px;
+  color: #CADBC0;
+}
+
+.expense-form input,
+.expense-form select {
+  margin-top: 6px;
+  padding: 10px;
+  border-radius: 6px;
+  border: none;
+  background-color: #333333;
+  color: #EDEFEA;
+}
+
+.expense-form button {
+  margin-top: 8px;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  background-color: #CADBC0;
+  color: #333333;
+  font-weight: 600;
+  cursor: pointer;
+}

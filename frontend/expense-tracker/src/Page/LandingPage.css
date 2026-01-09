@@ -1,0 +1,7 @@
+.dashboard {
+  max-width: 1300px;
+  margin: 40px auto;
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 24px;
+}

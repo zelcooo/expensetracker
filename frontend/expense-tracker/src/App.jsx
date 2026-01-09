@@ -1,15 +1,18 @@
 import React from 'react'
-import './components/Navbar'
-import './App.css'
+import Navbar from './components/Navbar'
+import Hero from './components/Hero'
+import Footer from './components/Footer'
+import Calculator from './components/Calculator'
+import LandingPage from './Page/LandingPage'
 
 function App() {
 
   return (
     <>
         <Navbar/>
-        <Hero/>
-        <Features/>
-        <Footer/>
+        <LandingPage/>
+        
+        
     </>
   )
 }
