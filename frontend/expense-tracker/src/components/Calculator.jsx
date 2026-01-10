@@ -21,11 +21,11 @@ export default function Calculator({onAddExpense}){
         e.preventDefault();
 
         const expense = {
-            title,amount,category,date,
+            title,amountSpent : Number(amount),category,date,
         };
     
 
-    const res = await fetch("http://localhost:8080/api/expenses", {
+    const res = await fetch("http://localhost:8080/expenses", {
         method: "POST",
         headers:{"Content-Type" : "application/json" },
         body: JSON.stringify(expense),

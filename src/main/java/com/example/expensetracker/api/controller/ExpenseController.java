@@ -11,6 +11,7 @@ import com.example.expensetracker.service.ExpenseService;
 
 import jakarta.validation.Valid;
 
+@CrossOrigin(origins = "http://localhost:5173")
 @RestController
 @RequestMapping("/expenses")
 public class ExpenseController {
