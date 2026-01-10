@@ -1,0 +1,12 @@
+.expense-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.expense-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
