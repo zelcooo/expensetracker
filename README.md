@@ -28,9 +28,9 @@ DevOps / Tooling
     REST API to create, delete, and fetch expenses
     Dockerized setup for other local devs
 
-  <p align="center">
+  
   <img src="image.png" alt="Expense Tracker UI" width="600"/>
-    </p>
+
 
   Running Locally
     You will need Docker and Docker Compose installed and then run the command (docker compose up --build) in the project root.
