@@ -28,7 +28,7 @@ DevOps / Tooling
     REST API to create, delete, and fetch expenses
     Dockerized setup for other local devs
 
-    <p align="center">
+  <p align="center">
   <img src="image.png" alt="Expense Tracker UI" width="600"/>
     </p>
 
